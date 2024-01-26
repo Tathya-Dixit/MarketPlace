@@ -28,6 +28,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['.vercel.app','127.0.0.1','localhost']
 
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_URL = '/'
+
 
 # Application definition
 
