@@ -1,0 +1,37 @@
+{% extends 'core/base.html' %}
+
+{% block title %}MarketPlace | Browse{% endblock %}
+
+
+{% block content %}
+    <div class="pb-6 grid grid-cols-4 gap-4">
+        <div class="px-2 col-span-1 bg-gray-100 rounded-r-xl mt-6">
+            <form action="{% url 'item:browse' %}" method="get">
+                <input name="query" value="{{query}}" placeholder="Like teddy, chair, sofa ..." type="text" class="w-full mt-2 py-4 px-6 border rounded-xl">
+                <button class="w-full mt-2 py-2 px-6 rounded-xl bg-teal-400 text-white text-lg font-semibold" >Search</button>
+            </form>
+        </div>
+        <div class="col-span-3">
+            <div class="mt-6 px-6 py-6 bg-gray-100 rounded-xl">
+                <h2 class="mb-12 text-3xl text-center text-gray-700 font-semibold" >ITEMS</h2>
+                
+                <div class="mb-10 grid grid-cols-4 gap-4">
+                    
+                    {% for item in items %}
+                    <div class="bg-teal-100 rounded-xl">
+                        <a href="{% url 'item:detail' item.id %}">
+                            <div>
+                                <img src="{{ item.image.url }}" alt="Nan" class="rounded-t-xl">
+                            </div>
+                            <div class="p-6 bg-white rounded-b-xl inset-x-0 bottom-0">
+                                <h2 class="text-2xl">{{item.name}}</h2>
+                                <p class="text-gray-500">Price : {{item.price}}</p>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

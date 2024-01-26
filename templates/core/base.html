@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <nav class="py-6 px-6 flex justify-between items-center border-b border-gray">
+        <a href="/" class="text-4xl font-bold">MARKETPLACE</a>
+        <div class="space-x-6 flex  justify-center items-center">
+            <a href="{% url 'item:browse' %}" class="text-lg font-semibold hover:text-gray-500">Browse</a>
+            {% if request.user.is_authenticated %}
+                <a href="{% url 'item:newitem' %}" class="text-lg text-white bg-gray-500 py-2 px-4 rounded-xl font-semibold hover:bg-gray-700">New Item</a>
+                <a href="{% url 'dashboard:dashboard' %}" class="text-lg text-white bg-teal-500 py-2 px-4 rounded-xl font-semibold hover:bg-teal-700">Dashboard</a>
+                <a href="/" class="text-xl py-2  rounded-xl font-bold flex justify-center items-center"><img src="{% static 'images/usericon.png' %}" class="w-5 h-5" alt="">{{request.user}}</a>
+                <a href="{% url 'core:logout' %}"><img src="{% static 'images/logout.png' %}" alt="logout" class="w-10 h-10 bg-red-400 rounded-xl p-2"></a>
+            {% else %}
+                <a href="{% url 'core:signup' %}" class="px-6 py-3 bg-teal-500 text-white rounded-xl text-lg font-semibold hover:bg-teal-700">SignUp</a>
+                <a href="{% url 'core:login' %}" class="px-6 py-3 bg-gray-500 text-white rounded-xl text-lg font-semibold hover:bg-gray-700">LogIn</a>
+            {% endif    %}
+        </div>
+    </nav>
+    {% block content %}
+    {% endblock %}
+    <footer class="px-6 py-6 flex justify-between bg-black text-white">
+        <div class="w-2/3 pr-10">
+            <h3 class="mb-5 font-semibold text-gray-400">About</h3>
+            <p class="text-lg text-gray-600">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laboriosam omnis explicabo qui laudantium. Culpa neque commodi accusamus dolorem deserunt quos.</p>
+        </div>
+        <div class="w-1/3">
+            <h3 class="text-lg mb-5 font-semibold text-gray-400">Menu</h3>
+            <ul class="space-y-2">
+                <li><a href="" class="text-teal-500 hover:text-teal-700">About</a></li>
+                <li><a href="{% url 'core:contactpage' %}" class="text-teal-500 hover:text-teal-700">Contact Us</a></li>
+                <li><a href="" class="text-teal-500 hover:text-teal-700">Privacy Policy</a></li>
+                <li><a href="" class="text-teal-500 hover:text-teal-700">Terms of use</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>

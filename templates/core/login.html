@@ -1,0 +1,32 @@
+{% extends 'core/base.html' %}
+
+{% block title %}LogIn | MarketPlace{% endblock %}
+
+{% block content %}
+    <div class="w-1/2 my-6 mx-auto rounded-xl bg-gray-200">
+        <h1 class="text-3xl py-6 font-bold text-center">LOGIN</h1>
+        <form action="." method="post">
+            {% csrf_token %}
+            <div class="py-6 bg-gray-500 rounded-xl mx-12">
+                <div class="mb-3 text-2xl">
+                    <label class="inline-block mb-2 w-1/2 text-right font-bold">Username : </label>
+                    {{form.username}}
+                </div>
+                <div class="mb-3 text-2xl">
+                    <label class="inline-block mb-2 w-1/2 text-right font-bold">Password : </label>
+                    {{form.password}}
+                </div>
+            </div>
+            {% if form.errors or form.non_field_errors %}
+                <div class="mb-4 py6 bg-red-100 rounded-xl">
+                    {% for field in form %}
+                        {{field.errors}}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <div class="flex items-center">
+                <button type="submit" class="my-4 mx-auto px-6 py-3 bg-teal-500 text-white rounded-xl text-lg font-semibold hover:bg-teal-700">Submit</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
