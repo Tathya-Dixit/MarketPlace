@@ -10,6 +10,18 @@
                 <input name="query" value="{{query}}" placeholder="Like teddy, chair, sofa ..." type="text" class="w-full mt-2 py-4 px-6 border rounded-xl">
                 <button class="w-full mt-2 py-2 px-6 rounded-xl bg-teal-400 text-white text-lg font-semibold" >Search</button>
             </form>
+            <hr class="my-6">
+            <p class="font-semibold">CATEGORIES</p>
+            <ul>
+                {% for category in categories %}
+                <li class="py-2 px-2 rounded-xl {% if category.id == category_id %}bg-gray-400 text-white{% endif %}">
+                    <a class="font-semibold" href="{% url 'item:browse' %}?query={{query}}&category={{category.id}}">{{category.name}}</a>
+                </li>
+                {% endfor %}
+            </ul>
+            <hr class="my-6">
+            <p class="font-semibold mb-5">CLEAR FILTERS</p>
+            <button class="w-full mt-2 py-2 px-6 rounded-xl bg-red-400 text-white text-lg font-semibold" ><a href="{% url 'item:browse' %}">Clear</a></button>
         </div>
         <div class="col-span-3">
             <div class="mt-6 px-6 py-6 bg-gray-100 rounded-xl">
